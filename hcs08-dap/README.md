@@ -14,19 +14,21 @@ hcs08-dap/
 │   ├── usbdm.py           USBDM 宿主库 ctypes 绑定和跨平台查找
 │   ├── target.py          目标控制：UsbdmTarget（真硬件）、FakeTarget（协议测试）
 │   └── adapter.py         DAP 服务器：断点、运行控制、栈、变量、求值、内存
-└── tests/                 unittest：解析真实 cal32.cdb，用 FakeTarget 跑完整调试会话
+└── tests/                 unittest：解析 fixtures/sample 的 .cdb，用 FakeTarget 跑完整调试会话
 ```
 
 ## 安装
 
-1. 固件用 `--debug` 构建（cal32-fw 的 Makefile 已加），得到 `build/cal32.s19` 和 `build/cal32.cdb`。
+1. 固件用 SDCC 加 `--debug` 编译和链接，得到 `.s19` 和同名的 `.cdb`（调试信息）。
 2. 在 hide 仓库根目录执行下面的命令，把本目录以符号链接方式装成 VSCode 扩展，然后重新加载窗口：
 
 ```
 ln -s "$PWD/hcs08-dap" ~/.vscode/extensions/readlbyte.hide-debug-0.1.0
 ```
 
-3. 装好 USBDM（或设置 `USBDM_HOME`，见下节），在 cal32-fw 里按 F5，选 "CAL32 固件：烧录并调试 (USBDM)"（配置在 `cal32-fw/.vscode/launch.json`）。
+3. 装好 USBDM（或设置 `USBDM_HOME`，见下节）。在固件工程里按 F5，选 "HIDE: HCS08 (USBDM, SDCC)"，
+   VSCode 会按扩展提供的模板生成 `.vscode/launch.json`，把 `program` 改成你的 `.s19` 路径即可；
+   也可以用配置片段 "HIDE: 烧录并调试" / "HIDE: 附加到运行中的目标"。
 
 ## USBDM 宿主库和烧录器的查找
 
@@ -71,7 +73,7 @@ launch.json 里的 "假目标演示 (无硬件)" 用 FakeTarget：它只在 `.cd
 
 - 接上 USBDM 后先用 USBDM 自带的 `UsbdmScript`（与烧录器同目录）确认 `settarget HCS08`、
   `openbdm`、`connect`、`rb 0x1800 8` 正常。
-- `vdd` 为 `off` 时目标板自供电（CAL32 板由 24 V 供电，探头不要供电）。
+- `vdd` 为 `off` 时目标板自供电；只有板子没有自己的电源时才让探头供电（`3V3` / `5V`）。
 - 烧录会先关闭适配器对探头的占用，调用 UsbdmFlashProgrammer 完成后再重新连接。
 - 处于 BDM 停机状态时 COP 看门狗停止计数，单步不会被看门狗复位；但停在断点时 RS485 通讯会超时。
 

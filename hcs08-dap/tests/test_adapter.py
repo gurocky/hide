@@ -53,7 +53,7 @@ class AdapterTests(unittest.TestCase):
         s = Session()
         caps = s.request("initialize", adapterID="hide-debug")
         self.assertTrue(caps["supportsConfigurationDoneRequest"])
-        s.request("launch", program=os.path.join(SRC, "..", "build", "cal32.s19"), fake=True, flash=False, sourceRoots=[SRC], **extra)
+        s.request("launch", program=os.path.join(SRC, "..", "build", "sample.s19"), fake=True, flash=False, sourceRoots=[SRC], **extra)
         s.wait_event("initialized")
         return s
 
@@ -66,7 +66,7 @@ class AdapterTests(unittest.TestCase):
         self.assertEqual(frames[0]["name"], "main")
         self.assertEqual(frames[0]["source"]["name"], "main.c")
         self.assertTrue(frames[0]["source"]["path"].endswith("main.c"))
-        self.assertEqual(frames[0]["line"], 14)
+        self.assertEqual(frames[0]["line"], 15)
 
     def test_breakpoint_step_variables_evaluate(self):
         s = self.start()
@@ -82,9 +82,9 @@ class AdapterTests(unittest.TestCase):
         frames = s.request("stackTrace", threadId=1)["stackFrames"]
         self.assertEqual(frames[0]["name"], "crc8")
         self.assertEqual(frames[0]["line"], 5)                    # lowest breakpoint address reached first
-        # locals: len @0x156, data @0x157 (pointer), crc @0x159
-        s.fake.write_mem(0x156, bytes([7]))
-        s.fake.write_mem(0x157, (0x0123).to_bytes(2, "big"))
+        # locals: len @0x144, data @0x145 (pointer), crc @0x147
+        s.fake.write_mem(0x144, bytes([7]))
+        s.fake.write_mem(0x145, (0x0123).to_bytes(2, "big"))
         s.fake.write_mem(0x123, b"\xA5")
         scopes = s.request("scopes", frameId=1)["scopes"]
         locals_ref = next(sc["variablesReference"] for sc in scopes if sc["name"] == "局部变量")
@@ -97,14 +97,14 @@ class AdapterTests(unittest.TestCase):
         # registers scope
         regs_ref = next(sc["variablesReference"] for sc in scopes if sc["name"] == "寄存器")
         regs = {v["name"]: v["value"] for v in s.request("variables", variablesReference=regs_ref)["variables"]}
-        self.assertEqual(regs["PC"], "0x2758")
+        self.assertEqual(regs["PC"], "0x1910")
         # evaluate
         self.assertTrue(s.request("evaluate", expression="len", frameId=1)["result"].startswith("7 "))
-        self.assertEqual(s.request("evaluate", expression="&len")["result"], "0x0156")
+        self.assertEqual(s.request("evaluate", expression="&len")["result"], "0x0144")
         self.assertTrue(s.request("evaluate", expression="*0x123")["result"].startswith("165"))
         # setVariable
         s.request("setVariable", variablesReference=locals_ref, name="len", value="0x20")
-        self.assertEqual(s.fake.read_mem(0x156, 1), b"\x20")
+        self.assertEqual(s.fake.read_mem(0x144, 1), b"\x20")
         # step to the next line
         s.request("next", threadId=1)
         body = s.wait_event("stopped")
@@ -128,7 +128,7 @@ class AdapterTests(unittest.TestCase):
         self.assertEqual(bits["PTAD1"], "0")
         self.assertTrue(s.request("evaluate", expression="_PTAD.Byte")["result"].startswith("129 "))
         # memory read
-        mem = s.request("readMemory", memoryReference="0x0156", count=1)
+        mem = s.request("readMemory", memoryReference="0x0144", count=1)
         self.assertEqual(mem["data"], "IA==")                      # base64 of 0x20
         s.request("disconnect")
         self.assertIn("close", s.fake.log)

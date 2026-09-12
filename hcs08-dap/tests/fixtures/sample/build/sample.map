@@ -1,0 +1,350 @@
+ASxxxx Linker V03.00/V05.40 + sdld,  page 1.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+CABS                                00000000    00000000 =           0. bytes (ABS,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+C:   00000000  l_CABS                          
+C:   00000000  l_CODEIVT                       
+C:   00000000  l_CONST                         
+C:   00000000  l_GSINIT                        
+C:   00000000  l_HOME                          
+C:   00000000  l_IABS                          
+C:   00000000  l_OSEG                          
+C:   00000000  l_XABS                          
+C:   00000000  l_XINIT                         
+C:   00000000  l_XISEG                         
+C:   00000000  l__CODE                         
+C:   00000000  s_CABS                          
+C:   00000000  s_CODEIVT                       
+C:   00000000  s_CODEIVT0                      
+C:   00000000  s_IABS                          
+C:   00000000  s_XABS                          
+C:   00000000  s__CODE                         
+C:   00000002  l_CODEIVT0                      
+C:   00000003  l_DSEG                          
+C:   00000003  l_GSFINAL                       
+C:   0000001E  l_GSINIT0                       
+C:   00000048  l_XSEG                          
+C:   00000070  s_DSEG                          
+C:   00000073  s_OSEG                          
+C:   000000D5  l_CSEG                          
+C:   00000100  s_XSEG                          
+C:   00000148  s_XISEG                         
+C:   00001860  s_GSINIT0                       
+C:   00001860  s_HOME                          
+C:   0000187E  s_GSFINAL                       
+C:   0000187E  s_GSINIT                        
+C:   00001881  s_CSEG                          
+C:   00001956  s_CONST                         
+C:   00001956  s_XINIT                         
+
+ASxxxx Linker V03.00/V05.40 + sdld,  page 2.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+CODEIVT0                            00000000    00000002 =           2. bytes (ABS,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+ASxxxx Linker V03.00/V05.40 + sdld,  page 3.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+.  .ABS.                            00000000    00000000 =           0. bytes (ABS,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     00000000  .__.ABS.                           _startup
+     00000000  G$_PTAD$0_0$0                      regs
+     00000000  __PTAD                             regs
+ASxxxx Linker V03.00/V05.40 + sdld,  page 4.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+_CODE                               00000000    00000000 =           0. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     00000000  A$crc8$6                           crc8
+     00000000  A$main$6                           main
+     00000000  A$regs$6                           regs
+     00000000  A$spi$6                            spi
+
+ASxxxx Linker V03.00/V05.40 + sdld,  page 5.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+GSINIT0                             00001860    0000001E =          30. bytes (REL,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+C:   00001860  A$main$26                          main
+C:   00001863  A$main$27                          main
+C:   00001864  A$main$28                          main
+C:   00001867  A$main$29                          main
+C:   00001869  A$main$30                          main
+C:   0000186C  A$main$33                          main
+C:   0000186F  A$main$35                          main
+C:   00001872  A$main$36                          main
+C:   00001874  A$main$37                          main
+C:   00001877  A$main$38                          main
+C:   0000187A  A$main$39                          main
+C:   0000187C  A$main$40                          main
+ASxxxx Linker V03.00/V05.40 + sdld,  page 6.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+GSFINAL                             0000187E    00000003 =           3. bytes (REL,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+C:   0000187E  A$main$44                          main
+
+ASxxxx Linker V03.00/V05.40 + sdld,  page 7.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+CSEG                                00001881    000000D5 =         213. bytes (REL,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+C:   00001881  A$main$48                          main
+C:   00001884  A$main$49                          main
+C:   00001886  A$main$122                         main
+C:   00001886  C$main.c$15$0_0$4                  main
+C:   00001886  C$main.c$17$1_0$4                  main
+C:   00001886  G$main$0$0                         main
+C:   00001886  _main                              main
+C:   00001888  A$main$123                         main
+C:   0000188B  A$main$126                         main
+C:   0000188B  C$main.c$18$1_0$4                  main
+C:   0000188D  A$main$127                         main
+C:   00001890  A$main$130                         main
+C:   00001890  C$main.c$19$1_0$4                  main
+C:   00001891  A$main$131                         main
+C:   00001894  A$main$134                         main
+C:   00001894  C$main.c$20$1_0$4                  main
+C:   00001895  A$main$135                         main
+C:   00001898  A$main$138                         main
+C:   00001898  C$main.c$21$1_0$4                  main
+C:   00001899  A$main$139                         main
+C:   0000189C  A$main$143                         main
+C:   0000189C  C$main.c$23$2_0$4                  main
+C:   0000189F  A$main$144                         main
+C:   000018A2  A$main$145                         main
+C:   000018A4  A$main$146                         main
+C:   000018A6  A$main$147                         main
+C:   000018A9  A$main$148                         main
+C:   000018AC  A$main$151                         main
+C:   000018AC  C$main.c$24$3_0$6                  main
+C:   000018AF  A$main$152                         main
+C:   000018B2  A$main$153                         main
+C:   000018B4  A$main$154                         main
+C:   000018B6  A$main$155                         main
+C:   000018B9  A$main$158                         main
+C:   000018B9  C$main.c$25$3_0$6                  main
+C:   000018BB  A$main$159                         main
+C:   000018BD  A$main$160                         main
+C:   000018BF  A$main$161                         main
+C:   000018C1  A$main$166                         main
+C:   000018C1  C$main.c$27$2_0$4                  main
+C:   000018C1  XG$main$0$0                        main
+C:   000018C2  A$spi$92                           spi
+C:   000018C2  C$spi.c$5$0_0$4                    spi
+C:   000018C2  Fspi$write_byte$0$0                spi
+C:   000018C5  A$spi$95                           spi
+C:   000018C6  A$spi$99                           spi
+C:   000018C6  C$spi.c$10$3_0$5                   spi
+C:   000018C9  A$spi$100                          spi
+C:   000018CB  A$spi$101                          spi
+C:   000018CD  A$spi$102                          spi
+ASxxxx Linker V03.00/V05.40 + sdld,  page 8.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+CSEG                                00001881    000000D5 =         213. bytes (REL,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+C:   000018CF  A$spi$104                          spi
+C:   000018D0  A$spi$106                          spi
+C:   000018D1  A$spi$107                          spi
+C:   000018D3  A$spi$108                          spi
+C:   000018D5  A$spi$109                          spi
+C:   000018D7  A$spi$111                          spi
+C:   000018D9  A$spi$115                          spi
+C:   000018D9  C$spi.c$11$3_0$5                   spi
+C:   000018DB  A$spi$118                          spi
+C:   000018DB  C$spi.c$12$3_0$5                   spi
+C:   000018DD  A$spi$121                          spi
+C:   000018DD  C$spi.c$13$3_0$5                   spi
+C:   000018E0  A$spi$122                          spi
+C:   000018E1  A$spi$123                          spi
+C:   000018E4  A$spi$126                          spi
+C:   000018E4  C$spi.c$9$2_0$4                    spi
+C:   000018E6  A$spi$127                          spi
+C:   000018E8  A$spi$128                          spi
+C:   000018EA  A$spi$133                          spi
+C:   000018EA  C$spi.c$15$2_0$4                   spi
+C:   000018EA  XFspi$write_byte$0$0               spi
+C:   000018EB  A$spi$151                          spi
+C:   000018EB  C$spi.c$17$2_0$7                   spi
+C:   000018EB  G$spi_send$0$0                     spi
+C:   000018EB  _spi_send                          spi
+C:   000018ED  A$spi$152                          spi
+C:   000018EF  A$spi$155                          spi
+C:   000018EF  C$spi.c$19$1_0$7                   spi
+C:   000018F2  A$spi$157                          spi
+C:   000018F3  A$spi$158                          spi
+C:   000018F4  A$spi$159                          spi
+C:   000018F5  A$spi$160                          spi
+C:   000018F7  A$spi$163                          spi
+C:   000018F7  C$spi.c$20$2_0$8                   spi
+C:   000018F9  A$spi$164                          spi
+C:   000018FA  A$spi$165                          spi
+C:   000018FB  A$spi$166                          spi
+C:   000018FD  A$spi$167                          spi
+C:   000018FF  A$spi$168                          spi
+C:   00001901  A$spi$169                          spi
+C:   00001903  A$spi$170                          spi
+C:   00001906  A$spi$171                          spi
+C:   00001907  A$spi$172                          spi
+C:   00001909  A$spi$178                          spi
+C:   00001909  C$spi.c$22$1_0$7                   spi
+C:   00001909  XG$spi_send$0$0                    spi
+C:   0000190A  A$crc8$92                          crc8
+C:   0000190A  C$crc8.c$3$0_0$3                   crc8
+C:   0000190A  G$crc8$0$0                         crc8
+C:   0000190A  _crc8                              crc8
+C:   0000190D  A$crc8$93                          crc8
+ASxxxx Linker V03.00/V05.40 + sdld,  page 9.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+CSEG                                00001881    000000D5 =         213. bytes (REL,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+C:   00001910  A$crc8$96                          crc8
+C:   00001910  C$crc8.c$5$2_0$3                   crc8
+C:   00001911  A$crc8$97                          crc8
+C:   00001914  A$crc8$100                         crc8
+C:   00001914  C$crc8.c$8$1_0$3                   crc8
+C:   00001915  A$crc8$101                         crc8
+C:   00001916  A$crc8$103                         crc8
+C:   00001917  A$crc8$104                         crc8
+C:   00001918  A$crc8$105                         crc8
+C:   0000191B  A$crc8$106                         crc8
+C:   0000191D  A$crc8$109                         crc8
+C:   0000191D  C$crc8.c$9$3_0$5                   crc8
+C:   0000191E  A$crc8$110                         crc8
+C:   0000191F  A$crc8$111                         crc8
+C:   00001922  A$crc8$112                         crc8
+C:   00001923  A$crc8$113                         crc8
+C:   00001924  A$crc8$114                         crc8
+C:   00001927  A$crc8$115                         crc8
+C:   00001928  A$crc8$116                         crc8
+C:   00001929  A$crc8$117                         crc8
+C:   0000192A  A$crc8$118                         crc8
+C:   0000192B  A$crc8$119                         crc8
+C:   0000192C  A$crc8$120                         crc8
+C:   0000192D  A$crc8$121                         crc8
+C:   00001930  A$crc8$122                         crc8
+C:   00001933  A$crc8$125                         crc8
+C:   00001933  C$crc8.c$10$1_0$3                  crc8
+C:   00001935  A$crc8$129                         crc8
+C:   00001935  C$crc8.c$11$1_0$3                  crc8
+C:   00001938  A$crc8$130                         crc8
+C:   00001939  A$crc8$131                         crc8
+C:   0000193A  A$crc8$132                         crc8
+C:   0000193D  A$crc8$133                         crc8
+C:   0000193E  A$crc8$134                         crc8
+C:   00001940  A$crc8$135                         crc8
+C:   00001942  A$crc8$137                         crc8
+C:   00001945  A$crc8$138                         crc8
+C:   00001946  A$crc8$141                         crc8
+C:   00001946  C$crc8.c$10$5_0$7                  crc8
+C:   00001947  A$crc8$142                         crc8
+C:   00001949  A$crc8$145                         crc8
+C:   00001949  C$crc8.c$8$2_0$4                   crc8
+C:   0000194A  A$crc8$146                         crc8
+C:   0000194D  A$crc8$147                         crc8
+C:   0000194E  A$crc8$148                         crc8
+C:   00001950  A$crc8$152                         crc8
+C:   00001950  C$crc8.c$14$1_0$3                  crc8
+C:   00001953  A$crc8$157                         crc8
+C:   00001953  C$crc8.c$15$1_0$3                  crc8
+C:   00001953  XG$crc8$0$0                        crc8
+C:   00001954  ___sdcc_external_startup           _startup
+
+ASxxxx Linker V03.00/V05.40 + sdld,  page 10.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+DSEG                                00000070    00000003 =           3. bytes (REL,CON,PAG)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     00000070  Lspi.spi_send$sloc0$0_1$0          spi
+     00000072  Lspi.spi_send$sloc1$0_1$0          spi
+
+ASxxxx Linker V03.00/V05.40 + sdld,  page 11.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+XSEG                                00000100    00000048 =          72. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     00000100  G$rx_buf$0_0$0                     main
+     00000100  _rx_buf                            main
+     00000140  G$rx_len$0_0$0                     main
+     00000140  _rx_len                            main
+     00000141  G$rx_crc$0_0$0                     main
+     00000141  _rx_crc                            main
+     00000142  Lspi.write_byte$value$1_0$0        spi
+     00000143  Lspi.spi_send$len$1_0$6            spi
+     00000143  _spi_send_PARM_2                   spi
+     00000144  Lcrc8.crc8$len$1_0$2               crc8
+     00000144  _crc8_PARM_2                       crc8
+     00000145  Lcrc8.crc8$data$1_0$0              crc8
+     00000147  Lcrc8.crc8$crc$1_0$0               crc8
+
+ASxxxx Linker V03.00/V05.40 + sdld,  page 12.
+
+Files Linked                              [ module(s) ]
+
+build/main.rel                            [ main ]
+build/regs.rel                            [ regs ]
+build/spi.rel                             [ spi ]
+build/crc8.rel                            [ crc8 ]
+
+
+Libraries Linked                          [ object file ]
+
+/opt/local/bin/../share/sdcc/lib/s08/s08.lib
+                                          [ _startup.rel ]
+
+ASxxxx Linker V03.00/V05.40 + sdld,  page 13.
+
+User Base Address Definitions
+
+HOME = 0x1860
+DSEG = 0x0070
+XSEG = 0x0100
+
+

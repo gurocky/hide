@@ -1,0 +1,6 @@
+# keep only what the tests read (plus the map for humans); rebuild with make
+*
+!.gitignore
+!sample.s19
+!sample.cdb
+!sample.map

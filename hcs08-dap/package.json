@@ -134,8 +134,8 @@
           {
             "type": "hide-debug",
             "request": "launch",
-            "name": "CAL32 固件 (USBDM)",
-            "program": "${workspaceFolder}/build/cal32.s19",
+            "name": "HIDE: 烧录并调试 (USBDM)",
+            "program": "${workspaceFolder}/build/${workspaceFolderBasename}.s19",
             "device": "MC9S08AW60",
             "flash": true,
             "vdd": "off"

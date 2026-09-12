@@ -1,22 +1,11 @@
-"""Locates the firmware build used as the test fixture.
-
-The tests parse a real SDCC ``--debug`` build of the CAL32 firmware (cal32-fw). Set
-``HCS08_DAP_FIXTURE`` to that project's directory, or keep ``cal32-fw`` next to ``hide``
-(or, for the old layout, next to ``hcs08-dap``). Tests are skipped when it is absent.
+"""The firmware build the tests parse: tests/fixtures/sample, a small SDCC S08 program whose
+build/ outputs (sample.s19, sample.cdb) are committed. See its Makefile before rebuilding it:
+the tests assert addresses and line numbers of that exact build.
 """
 import os
-import unittest
 
-_HERE = os.path.dirname(os.path.abspath(__file__))
-_CANDIDATES = [
-    os.environ.get("HCS08_DAP_FIXTURE") or "",
-    os.path.join(_HERE, "..", "..", "..", "cal32-fw"),   # sibling of hide/
-    os.path.join(_HERE, "..", "..", "cal32-fw"),         # sibling of hcs08-dap
-]
+SAMPLE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "fixtures", "sample")
 
 
 def firmware_dir() -> str:
-    for c in _CANDIDATES:
-        if c and os.path.isfile(os.path.join(c, "build", "cal32.cdb")):
-            return os.path.normpath(c)
-    raise unittest.SkipTest("cal32-fw build (build/cal32.cdb) not found; set HCS08_DAP_FIXTURE")
+    return SAMPLE
