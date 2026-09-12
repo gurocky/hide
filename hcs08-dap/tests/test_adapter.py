@@ -51,7 +51,7 @@ class AdapterTests(unittest.TestCase):
 
     def start(self, **extra):
         s = Session()
-        caps = s.request("initialize", adapterID="hide")
+        caps = s.request("initialize", adapterID="hide-debug")
         self.assertTrue(caps["supportsConfigurationDoneRequest"])
         s.request("launch", program=os.path.join(SRC, "..", "build", "cal32.s19"), fake=True, flash=False, sourceRoots=[SRC], **extra)
         s.wait_event("initialized")

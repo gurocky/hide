@@ -17,7 +17,7 @@
 - [ ] 编译：调用 SDCC，生成 `.s19` + `.cdb` + `.map`，SDCC 诊断的 problem matcher
 - [ ] 烧录：调用 `UsbdmFlashProgrammer`（擦除、编程、校验），状态栏按钮
 - [ ] 器件选择器：读取 usbdm `DeviceData/hcs08_devices.xml`，自动填 `--code-loc` / `--data-loc` / `--xram-loc` / `--stack-loc`
-- [ ] 调试配置生成：按工程输出路径生成 `hide` 类型的 launch 配置
+- [ ] 调试配置生成：按工程输出路径生成 `hide-debug` 类型的 launch 配置
 - [ ] 工程模板：启动文件、中断向量、寄存器头文件
 
 ## 阶段 2：器件支持与体验

@@ -1,16 +1,16 @@
 {
-  "name": "hide",
-  "displayName": "HIDE - HCS08 IDE (SDCC + USBDM)",
+  "name": "hide-debug",
+  "displayName": "HIDE Debug - HCS08 (SDCC + USBDM)",
   "description": "HCS08 integrated development in VSCode: SDCC build, USBDM flashing and source-level debugging",
   "version": "0.1.0",
-  "publisher": "hide",
+  "publisher": "readlbyte",
   "engines": { "vscode": "^1.80.0" },
   "categories": ["Debuggers"],
   "contributes": {
     "breakpoints": [{ "language": "c" }],
     "debuggers": [
       {
-        "type": "hide",
+        "type": "hide-debug",
         "label": "HIDE: HCS08 (USBDM, SDCC)",
         "languages": ["c"],
         "program": "./hcs08-dap.py",
@@ -46,7 +46,7 @@
         },
         "initialConfigurations": [
           {
-            "type": "hide",
+            "type": "hide-debug",
             "request": "launch",
             "name": "CAL32 固件 (USBDM)",
             "program": "${workspaceFolder}/build/cal32.s19",
@@ -60,7 +60,7 @@
             "label": "HCS08: 烧录并调试 (USBDM)",
             "description": "烧录 S19 后复位并停在 main()",
             "body": {
-              "type": "hide",
+              "type": "hide-debug",
               "request": "launch",
               "name": "HCS08 烧录并调试",
               "program": "^\"\\${workspaceFolder}/build/\\${1:firmware}.s19\"",
@@ -71,7 +71,7 @@
           {
             "label": "HCS08: 附加到运行中的目标 (USBDM)",
             "body": {
-              "type": "hide",
+              "type": "hide-debug",
               "request": "attach",
               "name": "HCS08 附加",
               "cdb": "^\"\\${workspaceFolder}/build/\\${1:firmware}.cdb\"",
