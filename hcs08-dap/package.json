@@ -1,0 +1,85 @@
+{
+  "name": "hcs08-usbdm-debug",
+  "displayName": "HCS08 USBDM Debug (SDCC)",
+  "description": "Source-level debugging of MC9S08 targets built with SDCC, through a USBDM probe",
+  "version": "0.1.0",
+  "publisher": "nsaboard",
+  "engines": { "vscode": "^1.80.0" },
+  "categories": ["Debuggers"],
+  "contributes": {
+    "breakpoints": [{ "language": "c" }],
+    "debuggers": [
+      {
+        "type": "hcs08-usbdm",
+        "label": "HCS08 (USBDM, SDCC)",
+        "languages": ["c"],
+        "program": "./hcs08-dap.py",
+        "runtime": "python3",
+        "configurationAttributes": {
+          "launch": {
+            "required": ["program"],
+            "properties": {
+              "program": { "type": "string", "description": "S19 固件文件（用 sdcc --debug 构建，旁边要有同名 .cdb）" },
+              "cdb": { "type": "string", "description": "SDCC 调试信息 .cdb，默认与 program 同名" },
+              "device": { "type": "string", "description": "USBDM 器件名", "default": "MC9S08AW60" },
+              "flash": { "type": "boolean", "description": "启动时先用 UsbdmFlashProgrammer 烧录 program", "default": true },
+              "vdd": { "type": "string", "enum": ["off", "3V3", "5V"], "description": "探头给目标供电", "default": "off" },
+              "stopAtEntry": { "type": "boolean", "description": "停在复位向量而不是 main()", "default": false },
+              "sourceRoots": { "type": "array", "items": { "type": "string" }, "description": "查找 .cdb 里源文件名的目录" },
+              "usbdmLib": { "type": "string", "description": "libusbdm.4.dylib 路径（默认 ../usbdm/PackageFiles/lib/<arch>/）" },
+              "usbdmProgrammer": { "type": "string", "description": "UsbdmFlashProgrammer 路径" },
+              "bdm": { "type": "number", "description": "多个探头时的序号", "default": 0 },
+              "fake": { "type": "boolean", "description": "不接硬件，用假目标演示协议", "default": false }
+            }
+          },
+          "attach": {
+            "required": ["cdb"],
+            "properties": {
+              "cdb": { "type": "string", "description": "SDCC 调试信息 .cdb" },
+              "device": { "type": "string", "default": "MC9S08AW60" },
+              "vdd": { "type": "string", "enum": ["off", "3V3", "5V"], "default": "off" },
+              "sourceRoots": { "type": "array", "items": { "type": "string" } },
+              "usbdmLib": { "type": "string" },
+              "bdm": { "type": "number", "default": 0 }
+            }
+          }
+        },
+        "initialConfigurations": [
+          {
+            "type": "hcs08-usbdm",
+            "request": "launch",
+            "name": "CAL32 固件 (USBDM)",
+            "program": "${workspaceFolder}/build/cal32.s19",
+            "device": "MC9S08AW60",
+            "flash": true,
+            "vdd": "off"
+          }
+        ],
+        "configurationSnippets": [
+          {
+            "label": "HCS08: 烧录并调试 (USBDM)",
+            "description": "烧录 S19 后复位并停在 main()",
+            "body": {
+              "type": "hcs08-usbdm",
+              "request": "launch",
+              "name": "HCS08 烧录并调试",
+              "program": "^\"\\${workspaceFolder}/build/\\${1:firmware}.s19\"",
+              "device": "MC9S08AW60",
+              "flash": true
+            }
+          },
+          {
+            "label": "HCS08: 附加到运行中的目标 (USBDM)",
+            "body": {
+              "type": "hcs08-usbdm",
+              "request": "attach",
+              "name": "HCS08 附加",
+              "cdb": "^\"\\${workspaceFolder}/build/\\${1:firmware}.cdb\"",
+              "device": "MC9S08AW60"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
