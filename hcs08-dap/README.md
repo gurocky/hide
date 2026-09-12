@@ -20,7 +20,7 @@ hcs08-dap/
 ## 安装
 
 1. 固件用 `--debug` 构建（cal32-fw 的 Makefile 已加），得到 `build/cal32.s19` 和 `build/cal32.cdb`。
-2. 在 HIDE 仓库根目录执行下面的命令，把本目录以符号链接方式装成 VSCode 扩展，然后重新加载窗口：
+2. 在 hide 仓库根目录执行下面的命令，把本目录以符号链接方式装成 VSCode 扩展，然后重新加载窗口：
 
 ```
 ln -s "$PWD/hcs08-dap" ~/.vscode/extensions/readlbyte.hide-debug-0.1.0

@@ -73,8 +73,8 @@ def default_package_dir() -> str:
         return env
     here = os.path.dirname(os.path.realpath(__file__))
     candidates = [
-        os.path.join(here, "..", "..", "usbdm", "PackageFiles"),        # <HIDE>/usbdm
-        os.path.join(here, "..", "..", "..", "usbdm", "PackageFiles"),  # sibling of <HIDE>
+        os.path.join(here, "..", "..", "usbdm", "PackageFiles"),        # <hide>/usbdm
+        os.path.join(here, "..", "..", "..", "usbdm", "PackageFiles"),  # sibling of <hide>
     ]
     for c in candidates:
         if os.path.isdir(c):

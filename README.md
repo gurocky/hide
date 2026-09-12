@@ -9,7 +9,7 @@ HIDE 是 [USBDM](https://github.com/podonoghue/usbdm-eclipse-makefiles-build) �
 
 ```
 <工作目录>/
-├── HIDE/     本仓库
+├── hide/     本仓库
 └── usbdm/    USBDM fork（macOS 用 macos 分支编译；Windows/Linux 可用官方安装包）
 ```
 
