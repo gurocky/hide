@@ -56,7 +56,7 @@ class Target:
 class UsbdmTarget(Target):
     def __init__(self, library: str | None = None, programmer: str | None = None, vdd: str = "off", bdm_index: int = 0):
         self.api = U.UsbdmApi(library)
-        self.programmer = programmer or U.default_programmer()
+        self.programmer = programmer            # resolved lazily by flash(); None = search the default locations
         self.vdd = vdd
         self.bdm_index = bdm_index
         self._bps: list[int] = []
@@ -162,13 +162,12 @@ class UsbdmTarget(Target):
     # ---- flash
     def program(self, s19: str, device: str, vdd: str, log) -> None:
         """Flash with the USBDM command-line programmer (it needs the USB device to itself)."""
-        if not os.path.exists(self.programmer):
-            raise RuntimeError(f"找不到 UsbdmFlashProgrammer: {self.programmer}")
+        programmer = U.find_programmer(self.programmer)
         was_open = self._open
         if was_open:
             self.api.close()
             self._open = False
-        cmd = [self.programmer, "-target=HCS08", f"-device={device}", "-erase=Mass", "-program", "-verify", "-verbose", "-execute", s19]
+        cmd = [programmer, "-target=HCS08", f"-device={device}", "-erase=Mass", "-program", "-verify", "-verbose", "-execute", s19]
         if vdd in ("3V3", "5V"):
             cmd.insert(3, f"-vdd={vdd}")
         log(" ".join(cmd))

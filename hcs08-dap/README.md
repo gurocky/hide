@@ -1,9 +1,9 @@
 # hcs08-dap — 在 VSCode 里源码级调试 MC9S08（SDCC + USBDM）
 
 GNU 工具链没有 HCS08 目标，USBDM 的 GDB 服务器也不支持 HCS08，所以这里直接实现 VSCode 的
-调试适配器协议（DAP）：适配器用 Python 写，通过 ctypes 调用本仓库编译出的
-`usbdm/PackageFiles/lib/x86_64-apple-darwin/libusbdm.4.dylib` 控制 BDM，源码、行号、变量、类型
-来自 SDCC `--debug` 生成的 `.cdb` 文件。不需要 GDB，也不需要再装任何包（Python 3 标准库）。
+调试适配器协议（DAP）：适配器用 Python 写，通过 ctypes 调用 USBDM 的宿主库控制 BDM，源码、行号、
+变量、类型来自 SDCC `--debug` 生成的 `.cdb` 文件。不需要 GDB，也不需要再装任何包（Python 3 标准库），
+Windows、Linux、macOS 通用。
 
 ```
 hcs08-dap/
@@ -11,7 +11,7 @@ hcs08-dap/
 ├── package.json           VSCode 扩展清单（扩展 ID readlbyte.hide-debug）：调试类型 hide-debug
 ├── hcs08dap/
 │   ├── cdb.py             SDCC .cdb 解析：函数地址范围、行号↔地址、符号、结构体
-│   ├── usbdm.py           libusbdm ctypes 绑定
+│   ├── usbdm.py           USBDM 宿主库 ctypes 绑定和跨平台查找
 │   ├── target.py          目标控制：UsbdmTarget（真硬件）、FakeTarget（协议测试）
 │   └── adapter.py         DAP 服务器：断点、运行控制、栈、变量、求值、内存
 └── tests/                 unittest：解析真实 cal32.cdb，用 FakeTarget 跑完整调试会话
@@ -27,6 +27,21 @@ ln -s "$PWD/hcs08-dap" ~/.vscode/extensions/readlbyte.hide-debug-0.1.0
 ```
 
 3. 在 cal32-fw 里按 F5，选 "CAL32 固件：烧录并调试 (USBDM)"（配置在 `cal32-fw/.vscode/launch.json`）。
+
+## USBDM 宿主库和烧录器的查找
+
+适配器需要 USBDM 的宿主库和命令行烧录器，各平台文件名和安装位置不同：
+
+| 平台 | 宿主库 | 烧录器 | 构建树（usbdm/PackageFiles） | 安装位置 |
+|---|---|---|---|---|
+| Windows | usbdm.4.dll | UsbdmFlashProgrammer.exe | bin/x86_64-win-gnu/（库和程序同目录） | 注册表 HKLM\SOFTWARE\pgo\USBDM 的 InstallationDirectory |
+| Linux | libusbdm.so.4 | UsbdmFlashProgrammer | lib/<multiarch>/、bin/<multiarch>/ | /usr/lib/<multiarch>/usbdm、/usr/bin（deb 包） |
+| macOS | libusbdm.4.dylib | UsbdmFlashProgrammer | lib/<arch>-apple-darwin/、bin/<arch>-apple-darwin/ | InstallMacOS 的前缀，默认 /usr/local/usbdm |
+
+查找顺序：launch 配置里的 `usbdmLib` / `usbdmProgrammer`（可以是文件也可以是目录） > 环境变量
+`USBDM_HOME`（PackageFiles 风格的树或安装前缀） > hide 旁边或 hide 里面的 usbdm 检出 > 上表的安装位置 >
+PATH（只对烧录器）。找不到时报错信息会列出查过的全部路径。宿主库只在启动调试会话时加载，
+烧录器只在 `flash` 为 true 时才需要。
 
 ## 能做什么
 
@@ -54,7 +69,7 @@ launch.json 里的 "假目标演示 (无硬件)" 用 FakeTarget：它只在 `.cd
 
 ## 硬件注意
 
-- 接上 USBDM 后先用 `usbdm/PackageFiles/bin/x86_64-apple-darwin/UsbdmScript` 确认 `settarget HCS08`、
+- 接上 USBDM 后先用 USBDM 自带的 `UsbdmScript`（与烧录器同目录）确认 `settarget HCS08`、
   `openbdm`、`connect`、`rb 0x1800 8` 正常。
 - `vdd` 为 `off` 时目标板自供电（CAL32 板由 24 V 供电，探头不要供电）。
 - 烧录会先关闭适配器对探头的占用，调用 UsbdmFlashProgrammer 完成后再重新连接。

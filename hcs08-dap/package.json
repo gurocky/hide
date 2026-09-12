@@ -4,43 +4,129 @@
   "description": "HCS08 integrated development in VSCode: SDCC build, USBDM flashing and source-level debugging",
   "version": "0.1.0",
   "publisher": "readlbyte",
-  "engines": { "vscode": "^1.80.0" },
-  "categories": ["Debuggers"],
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Debuggers"
+  ],
   "contributes": {
-    "breakpoints": [{ "language": "c" }],
+    "breakpoints": [
+      {
+        "language": "c"
+      }
+    ],
     "debuggers": [
       {
         "type": "hide-debug",
         "label": "HIDE: HCS08 (USBDM, SDCC)",
-        "languages": ["c"],
+        "languages": [
+          "c"
+        ],
         "program": "./hcs08-dap.py",
         "runtime": "python3",
         "configurationAttributes": {
           "launch": {
-            "required": ["program"],
+            "required": [
+              "program"
+            ],
             "properties": {
-              "program": { "type": "string", "description": "S19 固件文件（用 sdcc --debug 构建，旁边要有同名 .cdb）" },
-              "cdb": { "type": "string", "description": "SDCC 调试信息 .cdb，默认与 program 同名" },
-              "device": { "type": "string", "description": "USBDM 器件名", "default": "MC9S08AW60" },
-              "flash": { "type": "boolean", "description": "启动时先用 UsbdmFlashProgrammer 烧录 program", "default": true },
-              "vdd": { "type": "string", "enum": ["off", "3V3", "5V"], "description": "探头给目标供电", "default": "off" },
-              "stopAtEntry": { "type": "boolean", "description": "停在复位向量而不是 main()", "default": false },
-              "sourceRoots": { "type": "array", "items": { "type": "string" }, "description": "查找 .cdb 里源文件名的目录" },
-              "usbdmLib": { "type": "string", "description": "libusbdm.4.dylib 路径（默认 ../usbdm/PackageFiles/lib/<arch>/）" },
-              "usbdmProgrammer": { "type": "string", "description": "UsbdmFlashProgrammer 路径" },
-              "bdm": { "type": "number", "description": "多个探头时的序号", "default": 0 },
-              "fake": { "type": "boolean", "description": "不接硬件，用假目标演示协议", "default": false }
+              "program": {
+                "type": "string",
+                "description": "S19 固件文件（用 sdcc --debug 构建，旁边要有同名 .cdb）"
+              },
+              "cdb": {
+                "type": "string",
+                "description": "SDCC 调试信息 .cdb，默认与 program 同名"
+              },
+              "device": {
+                "type": "string",
+                "description": "USBDM 器件名",
+                "default": "MC9S08AW60"
+              },
+              "flash": {
+                "type": "boolean",
+                "description": "启动时先用 UsbdmFlashProgrammer 烧录 program",
+                "default": true
+              },
+              "vdd": {
+                "type": "string",
+                "enum": [
+                  "off",
+                  "3V3",
+                  "5V"
+                ],
+                "description": "探头给目标供电",
+                "default": "off"
+              },
+              "stopAtEntry": {
+                "type": "boolean",
+                "description": "停在复位向量而不是 main()",
+                "default": false
+              },
+              "sourceRoots": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "查找 .cdb 里源文件名的目录"
+              },
+              "usbdmLib": {
+                "type": "string",
+                "description": "USBDM 宿主库文件或所在目录（Windows usbdm.4.dll，Linux libusbdm.so.4，macOS libusbdm.4.dylib）。默认依次查找 $USBDM_HOME、hide 旁边的 usbdm 构建树、系统安装位置"
+              },
+              "usbdmProgrammer": {
+                "type": "string",
+                "description": "UsbdmFlashProgrammer 可执行文件或所在目录，默认查找位置同 usbdmLib，最后查 PATH"
+              },
+              "bdm": {
+                "type": "number",
+                "description": "多个探头时的序号",
+                "default": 0
+              },
+              "fake": {
+                "type": "boolean",
+                "description": "不接硬件，用假目标演示协议",
+                "default": false
+              }
             }
           },
           "attach": {
-            "required": ["cdb"],
+            "required": [
+              "cdb"
+            ],
             "properties": {
-              "cdb": { "type": "string", "description": "SDCC 调试信息 .cdb" },
-              "device": { "type": "string", "default": "MC9S08AW60" },
-              "vdd": { "type": "string", "enum": ["off", "3V3", "5V"], "default": "off" },
-              "sourceRoots": { "type": "array", "items": { "type": "string" } },
-              "usbdmLib": { "type": "string" },
-              "bdm": { "type": "number", "default": 0 }
+              "cdb": {
+                "type": "string",
+                "description": "SDCC 调试信息 .cdb"
+              },
+              "device": {
+                "type": "string",
+                "default": "MC9S08AW60"
+              },
+              "vdd": {
+                "type": "string",
+                "enum": [
+                  "off",
+                  "3V3",
+                  "5V"
+                ],
+                "default": "off"
+              },
+              "sourceRoots": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "usbdmLib": {
+                "type": "string",
+                "description": "USBDM 宿主库文件或所在目录，同 launch 的 usbdmLib"
+              },
+              "bdm": {
+                "type": "number",
+                "default": 0
+              }
             }
           }
         },
