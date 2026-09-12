@@ -1,4 +1,4 @@
-"""ctypes binding for the USBDM C API (libusbdm built from the usbdm checkout next to HIDE)."""
+"""ctypes binding for the USBDM C API (libusbdm built from the usbdm checkout next to hide/)."""
 from __future__ import annotations
 
 import ctypes
@@ -67,7 +67,7 @@ class ExtendedOptions(ctypes.Structure):
 
 
 def default_package_dir() -> str:
-    """$USBDM_HOME, else ``usbdm/PackageFiles`` of a usbdm checkout next to this directory or next to HIDE."""
+    """$USBDM_HOME, else ``usbdm/PackageFiles`` of a usbdm checkout next to this directory or next to hide/."""
     env = os.environ.get("USBDM_HOME")
     if env:
         return env
