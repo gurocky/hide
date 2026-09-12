@@ -26,7 +26,7 @@ hcs08-dap/
 ln -s "$PWD/hcs08-dap" ~/.vscode/extensions/readlbyte.hide-debug-0.1.0
 ```
 
-3. 在 cal32-fw 里按 F5，选 "CAL32 固件：烧录并调试 (USBDM)"（配置在 `cal32-fw/.vscode/launch.json`）。
+3. 装好 USBDM（或设置 `USBDM_HOME`，见下节），在 cal32-fw 里按 F5，选 "CAL32 固件：烧录并调试 (USBDM)"（配置在 `cal32-fw/.vscode/launch.json`）。
 
 ## USBDM 宿主库和烧录器的查找
 
@@ -39,9 +39,9 @@ ln -s "$PWD/hcs08-dap" ~/.vscode/extensions/readlbyte.hide-debug-0.1.0
 | macOS | libusbdm.4.dylib | UsbdmFlashProgrammer | lib/<arch>-apple-darwin/、bin/<arch>-apple-darwin/ | InstallMacOS 的前缀，默认 /usr/local/usbdm |
 
 查找顺序：launch 配置里的 `usbdmLib` / `usbdmProgrammer`（可以是文件也可以是目录） > 环境变量
-`USBDM_HOME`（PackageFiles 风格的树或安装前缀） > hide 旁边或 hide 里面的 usbdm 检出 > 上表的安装位置 >
-PATH（只对烧录器）。找不到时报错信息会列出查过的全部路径。宿主库只在启动调试会话时加载，
-烧录器只在 `flash` 为 true 时才需要。
+`USBDM_HOME`（PackageFiles 风格的构建树或安装前缀） > 上表的安装位置 > PATH（只对烧录器）。
+找不到时报错信息会列出查过的全部路径。宿主库只在启动调试会话时加载，烧录器只在 `flash` 为 true 时才需要。
+开发 USBDM 本身、用未安装的构建树时，把 `USBDM_HOME` 指向它的 `PackageFiles` 目录。
 
 ## 能做什么
 

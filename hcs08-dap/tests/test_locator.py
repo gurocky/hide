@@ -17,8 +17,9 @@ class LocatorTests(unittest.TestCase):
             self.assertEqual(U.library_name(), "usbdm.4.dll")
             self.assertEqual(U.programmer_name(), "UsbdmFlashProgrammer.exe")
             self.assertEqual(U.multiarch_dirs(), ["x86_64-win-gnu", "i386-win-gnu"])
-            cands = U._candidates("lib", U.library_name(), None)
-            self.assertTrue(any(c.replace("\\", "/").endswith("PackageFiles/bin/x86_64-win-gnu/usbdm.4.dll") for c in cands))
+            with mock.patch.dict(os.environ, {"USBDM_HOME": "C:/usbdm/PackageFiles"}):
+                cands = U._candidates("lib", U.library_name(), None)
+                self.assertTrue(any(c.replace("\\", "/").endswith("PackageFiles/bin/x86_64-win-gnu/usbdm.4.dll") for c in cands))
 
     def test_linux_names(self):
         with self._on("Linux", machine="aarch64")[0], self._on("Linux", machine="aarch64")[1]:
@@ -34,6 +35,12 @@ class LocatorTests(unittest.TestCase):
             self.assertEqual(U.library_name(), "libusbdm.4.dylib")
             self.assertEqual(U.multiarch_dirs(), ["arm64-apple-darwin"])
             self.assertIn("/usr/local/usbdm/lib/libusbdm.4.dylib", U._candidates("lib", U.library_name(), None))
+
+    def test_no_build_tree_guessing(self):
+        """Without USBDM_HOME only installed locations are searched: no usbdm checkout next to hide/."""
+        with self._on("Linux")[0], self._on("Linux")[1], mock.patch.dict(os.environ, {}, clear=True):
+            self.assertEqual(U.package_roots(), [])
+            self.assertFalse(any("PackageFiles" in c for c in U._candidates("lib", U.library_name(), None)))
 
     def test_explicit_and_env(self):
         with self._on("Linux")[0], self._on("Linux")[1]:

@@ -5,13 +5,8 @@
 
 HIDE 是 [USBDM](https://github.com/podonoghue/usbdm-eclipse-makefiles-build) 的兄弟项目：
 USBDM fork <https://github.com/gurocky/usbdm>（分支 `macos`）提供三平台可用的宿主库和命令行工具，HIDE 在其上提供 IDE 层。
-两个仓库并排放置即可工作：
-
-```
-<工作目录>/
-├── hide/     本仓库
-└── usbdm/    USBDM fork（macOS 用 macos 分支编译；Windows/Linux 可用官方安装包）
-```
+HIDE 使用已安装的 USBDM（Windows/Linux 用官方安装包，macOS 用 fork 的 `InstallMacOS`）；
+开发时也可以把环境变量 `USBDM_HOME` 指向未安装的构建树的 `PackageFiles` 目录。
 
 ## 范围
 
@@ -31,7 +26,7 @@ USBDM fork <https://github.com/gurocky/usbdm>（分支 `macos`）提供三平台
 ## 现在能做什么
 
 用 `hcs08-dap/` 即可在 VSCode 里调试 SDCC 固件，步骤见 [hcs08-dap/README.md](hcs08-dap/README.md)。
-要求：SDCC 4.x（`--debug` 构建），Python 3.10+，旁边有编译好的 usbdm 目录或设置 `USBDM_HOME`。
+要求：SDCC 4.x（`--debug` 构建），Python 3.10+，已安装 USBDM 或设置 `USBDM_HOME`。
 
 ## 依赖与许可
 

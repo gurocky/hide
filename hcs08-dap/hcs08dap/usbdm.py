@@ -1,4 +1,4 @@
-"""ctypes binding for the USBDM C API (libusbdm built from the usbdm checkout next to hide/)."""
+"""ctypes binding for the USBDM C API and the platform-specific lookup of its host library."""
 from __future__ import annotations
 
 import ctypes
@@ -76,8 +76,8 @@ class ExtendedOptions(ctypes.Structure):
 #   macOS      libusbdm.4.dylib     UsbdmFlashProgrammer       lib/<arch>-apple-darwin/, bin/...    <prefix>/lib, <prefix>/bin (InstallMacOS)
 #
 # Search order: explicit launch attribute (usbdmLib / usbdmProgrammer, file or directory) > $USBDM_HOME
-# (a PackageFiles-style tree or an installed prefix) > a usbdm checkout next to hide/ or inside it > the
-# platform's installed locations > PATH (programmer only).
+# (a PackageFiles-style build tree or an installed prefix) > the platform's installed locations > PATH
+# (programmer only). A developer using an uninstalled build tree points USBDM_HOME at its PackageFiles.
 
 _SYSTEM = platform.system()
 
@@ -122,15 +122,9 @@ def _windows_install_dir() -> str | None:
 
 
 def package_roots() -> list[str]:
-    """PackageFiles-style trees (lib/<arch>, bin/<arch>) in search order; entries need not exist."""
-    roots = []
+    """PackageFiles-style trees (lib/<arch>, bin/<arch>) or install prefixes (lib/, bin/): only $USBDM_HOME."""
     env = os.environ.get("USBDM_HOME")
-    if env:
-        roots.append(env)
-    here = os.path.dirname(os.path.realpath(__file__))
-    roots.append(os.path.join(here, "..", "..", "usbdm", "PackageFiles"))        # <hide>/usbdm
-    roots.append(os.path.join(here, "..", "..", "..", "usbdm", "PackageFiles"))  # sibling of hide/
-    return [os.path.normpath(r) for r in roots]
+    return [os.path.normpath(env)] if env else []
 
 
 def _installed_dirs(kind: str) -> list[str]:

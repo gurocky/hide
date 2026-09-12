@@ -73,7 +73,7 @@
               },
               "usbdmLib": {
                 "type": "string",
-                "description": "USBDM 宿主库文件或所在目录（Windows usbdm.4.dll，Linux libusbdm.so.4，macOS libusbdm.4.dylib）。默认依次查找 $USBDM_HOME、hide 旁边的 usbdm 构建树、系统安装位置"
+                "description": "USBDM 宿主库文件或所在目录（Windows usbdm.4.dll，Linux libusbdm.so.4，macOS libusbdm.4.dylib）。默认依次查找 $USBDM_HOME 和系统安装位置"
               },
               "usbdmProgrammer": {
                 "type": "string",
