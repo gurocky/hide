@@ -1,17 +1,17 @@
 {
-  "name": "hcs08-usbdm-debug",
-  "displayName": "HCS08 USBDM Debug (SDCC)",
-  "description": "Source-level debugging of MC9S08 targets built with SDCC, through a USBDM probe",
+  "name": "hide",
+  "displayName": "HIDE - HCS08 IDE (SDCC + USBDM)",
+  "description": "HCS08 integrated development in VSCode: SDCC build, USBDM flashing and source-level debugging",
   "version": "0.1.0",
-  "publisher": "nsaboard",
+  "publisher": "hide",
   "engines": { "vscode": "^1.80.0" },
   "categories": ["Debuggers"],
   "contributes": {
     "breakpoints": [{ "language": "c" }],
     "debuggers": [
       {
-        "type": "hcs08-usbdm",
-        "label": "HCS08 (USBDM, SDCC)",
+        "type": "hide",
+        "label": "HIDE: HCS08 (USBDM, SDCC)",
         "languages": ["c"],
         "program": "./hcs08-dap.py",
         "runtime": "python3",
@@ -46,7 +46,7 @@
         },
         "initialConfigurations": [
           {
-            "type": "hcs08-usbdm",
+            "type": "hide",
             "request": "launch",
             "name": "CAL32 固件 (USBDM)",
             "program": "${workspaceFolder}/build/cal32.s19",
@@ -60,7 +60,7 @@
             "label": "HCS08: 烧录并调试 (USBDM)",
             "description": "烧录 S19 后复位并停在 main()",
             "body": {
-              "type": "hcs08-usbdm",
+              "type": "hide",
               "request": "launch",
               "name": "HCS08 烧录并调试",
               "program": "^\"\\${workspaceFolder}/build/\\${1:firmware}.s19\"",
@@ -71,7 +71,7 @@
           {
             "label": "HCS08: 附加到运行中的目标 (USBDM)",
             "body": {
-              "type": "hcs08-usbdm",
+              "type": "hide",
               "request": "attach",
               "name": "HCS08 附加",
               "cdb": "^\"\\${workspaceFolder}/build/\\${1:firmware}.cdb\"",

@@ -8,7 +8,7 @@ GNU 工具链没有 HCS08 目标，USBDM 的 GDB 服务器也不支持 HCS08，�
 ```
 hcs08-dap/
 ├── hcs08-dap.py           VSCode 启动的适配器入口（stdio）
-├── package.json           VSCode 扩展清单：调试类型 hcs08-usbdm
+├── package.json           VSCode 扩展清单（扩展 ID hide.hide）：调试类型 hide
 ├── hcs08dap/
 │   ├── cdb.py             SDCC .cdb 解析：函数地址范围、行号↔地址、符号、结构体
 │   ├── usbdm.py           libusbdm ctypes 绑定
@@ -23,7 +23,7 @@ hcs08-dap/
 2. 在 HIDE 仓库根目录执行下面的命令，把本目录以符号链接方式装成 VSCode 扩展，然后重新加载窗口：
 
 ```
-ln -s "$PWD/hcs08-dap" ~/.vscode/extensions/nsaboard.hcs08-usbdm-debug-0.1.0
+ln -s "$PWD/hcs08-dap" ~/.vscode/extensions/hide.hide-0.1.0
 ```
 
 3. 在 cal32-fw 里按 F5，选 "CAL32 固件：烧录并调试 (USBDM)"（配置在 `cal32-fw/.vscode/launch.json`）。
