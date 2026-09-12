@@ -4,7 +4,7 @@
 用 **SDCC** 编译，用 **USBDM** 探头烧录和源码级调试，支持 **Windows、Linux、macOS**。
 
 HIDE 是 [USBDM](https://github.com/podonoghue/usbdm-eclipse-makefiles-build) 的兄弟项目：
-本人的 USBDM fork（分支 `macos`）提供三平台可用的宿主库和命令行工具，HIDE 在其上提供 IDE 层。
+USBDM fork <https://github.com/gurocky/usbdm>（分支 `macos`）提供三平台可用的宿主库和命令行工具，HIDE 在其上提供 IDE 层。
 两个仓库并排放置即可工作：
 
 ```
