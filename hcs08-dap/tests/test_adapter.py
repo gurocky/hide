@@ -5,8 +5,7 @@ import unittest
 from hcs08dap.adapter import Adapter
 from hcs08dap.target import FakeTarget
 
-CDB = os.path.join(os.path.dirname(__file__), "..", "..", "cal32-fw", "build", "cal32.cdb")
-SRC = os.path.join(os.path.dirname(__file__), "..", "..", "cal32-fw", "src")
+from fixture import firmware_dir
 
 
 class Session:
@@ -45,6 +44,11 @@ class Session:
 
 
 class AdapterTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        global SRC
+        SRC = os.path.join(firmware_dir(), "src")
+
     def start(self, **extra):
         s = Session()
         caps = s.request("initialize", adapterID="hcs08-usbdm")

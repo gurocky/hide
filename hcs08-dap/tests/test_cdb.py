@@ -3,13 +3,13 @@ import unittest
 
 from hcs08dap import cdb as cdbmod
 
-CDB = os.path.join(os.path.dirname(__file__), "..", "..", "cal32-fw", "build", "cal32.cdb")
+from fixture import firmware_dir
 
 
 class CdbTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.cdb = cdbmod.parse(CDB)
+        cls.cdb = cdbmod.parse(os.path.join(firmware_dir(), "build", "cal32.cdb"))
 
     def test_type_parsing(self):
         t = cdbmod.parse_type("{64}DA64d,SC:U")
